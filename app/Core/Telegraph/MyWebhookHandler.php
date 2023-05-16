@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Core\Telegraph;
+
+use DefStudio\Telegraph\Facades\Telegraph;
+use DefStudio\Telegraph\Handlers\WebhookHandler;
+use DefStudio\Telegraph\Models\TelegraphBot;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Stringable;
+
+class MyWebhookHandler extends WebhookHandler
+{
+
+    public function handleChatMessage(Stringable $text): void
+    {
+            $this->chat->html('<b>salom</b>')->send();
+    }
+
+
+}
