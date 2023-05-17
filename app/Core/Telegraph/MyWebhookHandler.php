@@ -12,10 +12,4 @@ use Illuminate\Support\Stringable;
 class MyWebhookHandler extends WebhookHandler
 {
 
-    public function handleChatMessage(Stringable $text): void
-    {
-            $this->chat->html('<b>salom</b>')->send();
-    }
-
-
 }
