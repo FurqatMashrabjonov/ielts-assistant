@@ -8,6 +8,7 @@ use App\Models\SpeakingCategory;
 use Faker\Provider\Text;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -30,7 +31,8 @@ class SpeakingCategoryResource extends Resource
                 DatePicker::make('from_date')->label('From Date')->requiredWithout('always'),
                 DatePicker::make('to_date')->label('To Date')->requiredWithout('always'),
                 Checkbox::make('always')->label('Always in use')->requiredWithout('from_date,to_date'),
-            ]);
+//                FileUpload::make('attachment')->disk('cambridge')
+                ]);
     }
 
     public static function table(Table $table): Table
@@ -42,11 +44,7 @@ class SpeakingCategoryResource extends Resource
                     SpeakingCategoryStatus::ACTIVE => 'Active',
                     SpeakingCategoryStatus::INACTIVE => 'Inactive',
                 ])->sortable(),
-                BadgeColumn::make('status')
-                    ->colors([
-                        'success' => 'active',
-                        'secondary' => 'inactive',
-                    ]),
+                BadgeColumn::make('status')->colors(['success' => 'active', 'secondary' => 'inactive',]),
                 Tables\Columns\TextColumn::make('created_at')->date('d M Y'),
                 Tables\Columns\TextColumn::make('from_date')->date('M Y'),
                 Tables\Columns\TextColumn::make('to_date')->date('M Y')

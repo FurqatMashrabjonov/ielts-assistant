@@ -43,6 +43,13 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'cambridge' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/cambridge'),
+            'url' => env('APP_URL').'/cambridge',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
@@ -71,6 +78,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('cambridge') => storage_path('app/public/cambridge'),
     ],
 
 ];
