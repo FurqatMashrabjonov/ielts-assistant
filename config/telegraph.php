@@ -8,7 +8,6 @@ return [
      * for self-hosted servers
      */
     'telegram_api_url' => 'https://api.telegram.org/',
-
     /*
      * Sets Telegraph messages default parse mode
      * allowed values: html|markdown|MarkdownV2
