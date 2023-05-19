@@ -11,7 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class SpeakingQuestionStatus extends Enum
 {
-    const OptionOne = 0;
-    const OptionTwo = 1;
-    const OptionThree = 2;
+    const ACTIVE = 'active';
+    const INACTIVE = 'inactive';
 }
