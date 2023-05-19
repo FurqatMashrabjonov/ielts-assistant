@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('confirmed_by')->nullable();
             $table->unsignedBigInteger('chat_id')->nullable();
             $table->string('title');
-            $table->timestamp('from_date');
-            $table->timestamp('to_date');
+            $table->timestamp('from_date')->nullable();
+            $table->timestamp('to_date')->nullable();
+            $table->boolean('always')->nullable();
             $table->string('status');
-            $table->string('from');
             $table->timestamps();
         });
     }

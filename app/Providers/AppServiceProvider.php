@@ -2,8 +2,15 @@
 
 namespace App\Providers;
 
+use App\Filament\Resources\SpeakingCategoryResource;
+use App\Filament\Resources\UserResource;
+use App\Filament\Services\NavigationService;
+use App\Models\SpeakingCategory;
 use App\Models\User;
 use App\Observers\UserObserver;
+use Filament\Facades\Filament;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(UserObserver::class);
+
+        NavigationService::navigator();
     }
 }

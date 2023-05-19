@@ -17,7 +17,7 @@ class TelegraphBotSeeder extends Seeder
     {
         TelegraphBot::query()->create([
            'token' => config('telegraph.token'),
-            'name' => 'Optional'
+            'name' => 'IELTS BOT'
         ]);
     }
 }

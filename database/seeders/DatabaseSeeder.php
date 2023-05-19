@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\UserRole;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
          \App\Models\User::factory()->create([
              'name' => 'Admin',
              'email' => 'admin@mail.ru',
-             'password' => bcrypt('admin12345')
+             'password' => bcrypt('admin12345'),
+             'role' => UserRole::SUPER_ADMIN
          ]);
         $this->call(TelegraphBotSeeder::class);
     }

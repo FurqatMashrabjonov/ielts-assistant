@@ -14,6 +14,8 @@ return [
      */
     'default_parse_mode' => Telegraph::PARSE_HTML,
 
+    'token' => env('TELEGRAM_BOT_TOKEN', ''),
+
     /*
      * Sets the handler to be used when Telegraph
      * receives a new webhook call.
