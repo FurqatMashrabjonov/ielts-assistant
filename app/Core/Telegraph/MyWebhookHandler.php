@@ -59,6 +59,8 @@ class MyWebhookHandler extends WebhookHandler
 
 
 
+
+
 //        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
         $cam = Cambridge::query()->where('key', 'Cam 2 2')->first();
         $this->bot->answerInlineQuery($inlineQuery->id(), [
