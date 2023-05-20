@@ -5,6 +5,7 @@ namespace App\Core\Telegraph;
 use App\Core\Telegraph\Keyboards\KeyboardService;
 use App\Filament\Resources\CambridgeResource;
 use App\Models\Cambridge;
+use App\Models\From;
 use App\Observers\TelegraphChat;
 use DefStudio\Telegraph\DTO\InlineQuery;
 use DefStudio\Telegraph\DTO\InlineQueryResultArticle;
@@ -38,10 +39,15 @@ class MyWebhookHandler extends WebhookHandler
    {
        $this->chat->message("Prepare for <b>IELTS</b> with us")
            ->replyKeyboard(KeyboardService::mainMarkup())->send();
-       $chat = \DefStudio\Telegraph\Models\TelegraphChat::query()->where('chat_id', $this->chat->id)->first();
-       if (is_null($chat->from)){
-           $chat->update(['from' => $this->message->from()->toArray()]);
+
+       $chat_user = From::query()->where('chat_id', $this->chat->chat_id)->first();
+       if (!isset($chat_user)){
+           From::query()->create([
+               'chat_id' => $this->chat->chat_id,
+               'user' => $this->message->from()->toArray()
+           ]);
        }
+
    }
 
     public function handleInlineQuery(InlineQuery $inlineQuery): void
@@ -67,11 +73,7 @@ class MyWebhookHandler extends WebhookHandler
 
 
 //        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
-        $chat = \DefStudio\Telegraph\Models\TelegraphChat::query()->where('chat_id', $this->chat->id)->first();
 
-        if (is_null($chat->from)){
-            $chat->update(['from' => $this->message->from()->toArray()]);
-        }
 
         $cam = Cambridge::query()->where('key', 'Cam 2 2')->first();
         $this->bot->answerInlineQuery($inlineQuery->id(), [
