@@ -39,7 +39,7 @@ class MyWebhookHandler extends WebhookHandler
        $this->chat->message("Prepare for <b>IELTS</b> with us")
            ->replyKeyboard(KeyboardService::mainMarkup())->send();
        $chat = \DefStudio\Telegraph\Models\TelegraphChat::query()->where('chat_id', $this->chat->id)->first();
-       if ($chat->from == null){
+       if (is_null($chat->from)){
            $chat->update(['from' => $this->message->from()->toArray()]);
        }
    }
@@ -69,7 +69,7 @@ class MyWebhookHandler extends WebhookHandler
 //        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
         $chat = \DefStudio\Telegraph\Models\TelegraphChat::query()->where('chat_id', $this->chat->id)->first();
 
-        if ($chat->from == null){
+        if (is_null($chat->from)){
             $chat->update(['from' => $this->message->from()->toArray()]);
         }
 
