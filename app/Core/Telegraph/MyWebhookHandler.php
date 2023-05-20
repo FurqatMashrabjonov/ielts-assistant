@@ -5,6 +5,7 @@ namespace App\Core\Telegraph;
 use App\Core\Telegraph\Keyboards\KeyboardService;
 use App\Filament\Resources\CambridgeResource;
 use App\Models\Cambridge;
+use App\Observers\TelegraphChat;
 use DefStudio\Telegraph\DTO\InlineQuery;
 use DefStudio\Telegraph\DTO\InlineQueryResultArticle;
 use DefStudio\Telegraph\DTO\InlineQueryResultAudio;
@@ -37,6 +38,10 @@ class MyWebhookHandler extends WebhookHandler
    {
        $this->chat->message("Prepare for <b>IELTS</b> with us")
            ->replyKeyboard(KeyboardService::mainMarkup())->send();
+       $chat = \DefStudio\Telegraph\Models\TelegraphChat::query()->where('chat_id', $this->chat->id)->first();
+       if ($chat->from == null){
+           $chat->update(['from' => $this->message->from()->toArray()]);
+       }
    }
 
     public function handleInlineQuery(InlineQuery $inlineQuery): void
@@ -62,6 +67,12 @@ class MyWebhookHandler extends WebhookHandler
 
 
 //        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
+        $chat = \DefStudio\Telegraph\Models\TelegraphChat::query()->where('chat_id', $this->chat->id)->first();
+
+        if ($chat->from == null){
+            $chat->update(['from' => $this->message->from()->toArray()]);
+        }
+
         $cam = Cambridge::query()->where('key', 'Cam 2 2')->first();
         $this->bot->answerInlineQuery($inlineQuery->id(), [
             InlineQueryResultAudio::make($cam->id, config('app.url') . $cam->audio_path, config('app.url') . $cam->audio_path)
