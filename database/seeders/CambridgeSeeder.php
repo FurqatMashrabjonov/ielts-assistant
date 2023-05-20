@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cambridge;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,6 @@ class CambridgeSeeder extends Seeder
             }
         }
 
-        DB::table('cambridges')->insert($data);
+        Cambridge::query()->insert($data);
     }
 }
