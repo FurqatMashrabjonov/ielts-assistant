@@ -3,8 +3,11 @@
 namespace App\Core\Telegraph;
 
 use App\Core\Telegraph\Keyboards\KeyboardService;
+use App\Filament\Resources\CambridgeResource;
+use App\Models\Cambridge;
 use DefStudio\Telegraph\DTO\InlineQuery;
 use DefStudio\Telegraph\DTO\InlineQueryResultArticle;
+use DefStudio\Telegraph\DTO\InlineQueryResultAudio;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -38,19 +41,25 @@ class MyWebhookHandler extends WebhookHandler
 
     public function handleInlineQuery(InlineQuery $inlineQuery): void
     {
-        $query = $inlineQuery->query(); //string
+//        $query = ucfirst($inlineQuery->query()); //string
+//        \Log::debug($query);
+//        $cams = Cambridge::query()
+//            ->where('key', 'LIKE', "%$query%")
+//            ->orWhere('name', 'LIKE', "%$query%")
+//            ->limit(50)
+//            ->get();
+//
+//        \Log::info('data', $cams->toArray());
+//
+//        $data = [];
 
-        DB::table('cambridges')->where('key', 'like', '%%')->get();
-
-
+//        foreach ($cams as $cam) {
+//            $data[] = InlineQueryResultArticle::make($cam->id, $cam->name, $cam->audio_path);
+//        }
+//        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
+        $cam = Cambridge::query()->where('key', 'Cam 2 2')->first();
         $this->bot->answerInlineQuery($inlineQuery->id(), [
-            InlineQueryResultArticle::make(rand(1000, 9999), 'Salom', 'hello world'),
-            InlineQueryResultArticle::make(rand(1000, 9999), 'Salom', 'hello world'),
-            InlineQueryResultArticle::make(rand(1000, 9999), 'Salom', 'hello world'),
-            InlineQueryResultArticle::make(rand(1000, 9999), 'Salom', 'hello world'),
-            InlineQueryResultArticle::make(rand(1000, 9999), 'Salom', 'hello world'),
-            InlineQueryResultArticle::make(rand(1000, 9999), 'Salom', 'hello world'),
-
+            InlineQueryResultAudio::make($cam->id, config('app.url') . $cam->audio_path, config('app.url') . $cam->audio_path)
         ])->send();
     }
 
