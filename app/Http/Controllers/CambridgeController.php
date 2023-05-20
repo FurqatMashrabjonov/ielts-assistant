@@ -2,23 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Core\Response\ResponseService;
-use App\Enums\SpeakingCategoryStatus;
-use App\Models\SpeakingCategory;
+use App\Models\Cambridge;
 use Illuminate\Http\Request;
 
-class SpeakingCategoryController extends Controller
+class CambridgeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = SpeakingCategory::query()
-            ->where('status', SpeakingCategoryStatus::ACTIVE)
-            ->with(['user'])
-            ->get();
-        return ResponseService::success($categories);
+        //
     }
 
     /**
@@ -40,7 +34,7 @@ class SpeakingCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SpeakingCategory $speakingCategory)
+    public function show(Cambridge $cambridge)
     {
         //
     }
@@ -48,7 +42,7 @@ class SpeakingCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SpeakingCategory $speakingCategory)
+    public function edit(Cambridge $cambridge)
     {
         //
     }
@@ -56,7 +50,7 @@ class SpeakingCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SpeakingCategory $speakingCategory)
+    public function update(Request $request, Cambridge $cambridge)
     {
         //
     }
@@ -64,7 +58,7 @@ class SpeakingCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SpeakingCategory $speakingCategory)
+    public function destroy(Cambridge $cambridge)
     {
         //
     }

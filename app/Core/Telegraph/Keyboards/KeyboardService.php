@@ -29,7 +29,7 @@ class KeyboardService
             ReplyButton::make('foo')->requestLocation(),
             ReplyButton::make('bar')->requestQuiz(),
         ])->row([
-            ReplyButton::make('baz')->webApp('https://glacial-chamber-78137.herokuapp.com'),
+            ReplyButton::make('baz')->webApp(config('app.url' ) . '/admin'),
         ]);
     }
 

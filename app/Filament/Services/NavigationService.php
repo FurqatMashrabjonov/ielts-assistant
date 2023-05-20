@@ -3,6 +3,7 @@
 namespace App\Filament\Services;
 
 use App\Enums\UserRole;
+use App\Filament\Resources\CambridgeResource;
 use App\Filament\Resources\SpeakingAnswerResource;
 use App\Filament\Resources\SpeakingCategoryResource;
 use App\Filament\Resources\SpeakingIdeaResource;
@@ -28,6 +29,10 @@ class NavigationService
                 ...UserResource::getNavigationItems()
             ];
 
+            $cambridgeItems = [
+              ...CambridgeResource::getNavigationItems()
+            ];
+
             return match (auth()->user()->role){
                 UserRole::MODERATOR => [
                     NavigationGroup::make('Speaking')
@@ -37,6 +42,8 @@ class NavigationService
                         ->items($generalItems),
                     NavigationGroup::make('Speaking')
                         ->items($speakingItems),
+                    NavigationGroup::make('Cambridge')
+                        ->items($cambridgeItems),
                 ]
             };
     }
