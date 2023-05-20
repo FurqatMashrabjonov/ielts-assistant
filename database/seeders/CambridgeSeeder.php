@@ -18,12 +18,12 @@ class CambridgeSeeder extends Seeder
 
         for ($i = 1; $i <= 17; $i++) {
             for ($j = 1; $j <= 4; $j++) {
-                    $data[] = [
-                        'name' => 'Cambridge $i Test $j Audio',
-                        'key' => 'Cam '.$i.' '. $j,
-                        'audio_path' => '/cambridge/audios/'.$i.'/'.$j.'/Cambridge' . $i . 'Test' . $j . '.mp3',
-                        'pdf_path' => '/cambridge/pdf/$i/$j/Cambridge' . $i . 'Test' . $j . '.pdf'
-                    ];
+                $data[] = [
+                    'name' => 'Cambridge ' . $i . ' Test ' . $j . ' Audio',
+                    'key' => 'Cam ' . $i . ' ' . $j,
+                    'audio_path' => '/cambridge/audios/' . $i . '/' . $j . '/Cambridge' . $i . 'Test' . $j . '.mp3',
+                    'pdf_path' => '/cambridge/pdf/$i/$j/Cambridge' . $i . 'Test' . $j . '.pdf'
+                ];
             }
         }
 
