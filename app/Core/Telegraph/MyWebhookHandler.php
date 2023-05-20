@@ -56,6 +56,9 @@ class MyWebhookHandler extends WebhookHandler
 //        foreach ($cams as $cam) {
 //            $data[] = InlineQueryResultArticle::make($cam->id, $cam->name, $cam->audio_path);
 //        }
+
+
+
 //        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
         $cam = Cambridge::query()->where('key', 'Cam 2 2')->first();
         $this->bot->answerInlineQuery($inlineQuery->id(), [
