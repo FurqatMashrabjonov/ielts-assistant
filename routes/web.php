@@ -23,5 +23,9 @@ Route::get('/webhook', function (){
 });
 
 Route::get('/audio', function (){
-    return Response::download(public_path('Cambridge2Test2.mp3'));
+    $file= public_path('Cambridge2Test2.mp3');
+    $headers = array(
+        'Content-Type: audio/mpeg',
+    );
+    return Response::download($file, 'filename.pdf', $headers);
 });
