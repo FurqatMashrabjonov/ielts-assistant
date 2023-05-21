@@ -29,3 +29,11 @@ Route::get('/audio', function (){
     );
     return Response::download($file, 'filename.pdf', $headers);
 });
+
+Route::get('/s', function (){
+    $filename = 'temp-image.mp3';
+    $tempImage = tempnam(sys_get_temp_dir(), $filename);
+    copy('https://api.telegram.org/file/bot5973511124:AAFr9ncceHvcEoJhgmX_CbcqS2oR5JYfC3A/music/file_2.mp3', $tempImage);
+
+    return response()->download($tempImage, $filename);
+});

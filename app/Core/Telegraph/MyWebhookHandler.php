@@ -26,13 +26,22 @@ class MyWebhookHandler extends WebhookHandler
 
     public function handleChatMessage(Stringable $text): void
     {
+//        $this->chat->document('CQACAgIAAxkBAAO9ZGo8p78o1SCa99LqKKTQ86P47ooAAmQ2AAIPNVlLUPvNwcJEJN8vBA')->keyboard(
+//            Keyboard::make()->buttons([
+//                Button::make('Delete')->action('delete')->param('id', '42'),
+//            ])
+//        )->send();
 
-
-
-        \Log::debug(json_encode($this->message->audio()->toArray()));
         if (!is_null($this->message->audio())) {
-            $this->handleAudio($this->message->audio(), );
+            $this->reply(
+                $this->message->audio()->id() . '
+
+                ' .
+                $this->message->audio()->filename()
+            );
         }
+//        $res = $this->chat->document('https://api.telegram.org/file/bot5973511124:AAFr9ncceHvcEoJhgmX_CbcqS2oR5JYfC3A/music/file_2.mp3');
+//        \Log::debug(json_encode($res->toArray()));
     }
 
 
@@ -40,7 +49,7 @@ class MyWebhookHandler extends WebhookHandler
     {
         $id = $audio->id();
         $res = \Telegraph::getFileInfo($id);
-        \Log::debug($res->getUrl());
+        \Log::debug(json_encode($audio->toArray()));
     }
 
 
@@ -88,7 +97,7 @@ class MyWebhookHandler extends WebhookHandler
         $this->bot->answerInlineQuery($inlineQuery->id(), [
 
 //            InlineQueryResultAudio::make($cam->id, 'https://ieltstrainingonline.com/wp-content/uploads/2021/07/Cam15-Test2-Part1.m4a?_=1', 'Qondayee'),
-            InlineQueryResultAudio::make($cam->id . 'sda', config('app.url') . '/audio', 'localniy fayl respnse')->caption('salom'),
+            InlineQueryResultAudio::make($cam->id . 'sda', 'https://api.telegram.org/bot5973511124:AAFr9ncceHvcEoJhgmX_CbcqS2oR5JYfC3A/getFile?file_id=CQACAgIAAxkBAAOrZGoswycZPBJoQfsZfzQWjKLcznUAAmsvAAIPNVFLx2yJxXPp1RgvBA', 'heroku')->caption('heoku'),
         ])->send();
     }
 
