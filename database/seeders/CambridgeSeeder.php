@@ -21,8 +21,8 @@ class CambridgeSeeder extends Seeder
                 $data[] = [
                     'name' => 'Cambridge ' . $i . ' Test ' . $j . ' Audio',
                     'key' => 'Cam ' . $i . ' ' . $j,
-                    'audio_path' => '/cambridge/audios/' . $i . '/' . $j . '/Cambridge' . $i . 'Test' . $j . '.mp3',
-                    'pdf_path' => '/cambridge/pdf/$i/$j/Cambridge' . $i . 'Test' . $j . '.pdf'
+                    'audio_path' => '/audios/Cambridge' . $i . 'Test' . $j . '.mp3',
+                    'pdf_path' => '/cambridge/pdf/Cambridge' . $i . 'Test' . $j . '.pdf'
                 ];
             }
         }

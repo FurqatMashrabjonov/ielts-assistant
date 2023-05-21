@@ -21,3 +21,7 @@ Route::get('/webhook', function (){
     $bot = \DefStudio\Telegraph\Models\TelegraphBot::query()->first();
     echo $bot->registerWebhook()->send();
 });
+
+Route::get('/audio', function (){
+    return Response::download(public_path('Cambridge2Test2.mp3'));
+});

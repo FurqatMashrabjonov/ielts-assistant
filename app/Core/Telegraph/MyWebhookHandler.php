@@ -7,9 +7,11 @@ use App\Filament\Resources\CambridgeResource;
 use App\Models\Cambridge;
 use App\Models\From;
 use App\Observers\TelegraphChat;
+use DefStudio\Telegraph\DTO\Audio;
 use DefStudio\Telegraph\DTO\InlineQuery;
 use DefStudio\Telegraph\DTO\InlineQueryResultArticle;
 use DefStudio\Telegraph\DTO\InlineQueryResultAudio;
+use DefStudio\Telegraph\Facades\Telegraph;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -25,30 +27,40 @@ class MyWebhookHandler extends WebhookHandler
     public function handleChatMessage(Stringable $text): void
     {
 
+
+
+        \Log::debug(json_encode($this->message->audio()->toArray()));
+        if (!is_null($this->message->audio())) {
+            $this->handleAudio($this->message->audio(), );
+        }
     }
 
 
-
-
-
-
+    public function handleAudio(Audio $audio)
+    {
+        $id = $audio->id();
+        $res = \Telegraph::getFileInfo($id);
+        \Log::debug($res->getUrl());
+    }
 
 
     //COMMAND HANDLERS
-   public function start($parameters): void
-   {
-       $this->chat->message("Prepare for <b>IELTS</b> with us")
-           ->replyKeyboard(KeyboardService::mainMarkup())->send();
+    public function start($parameters): void
+    {
 
-       $chat_user = From::query()->where('chat_id', $this->chat->chat_id)->first();
-       if (!isset($chat_user)){
-           From::query()->create([
-               'chat_id' => $this->chat->chat_id,
-               'user' => $this->message->from()->toArray()
-           ]);
-       }
 
-   }
+//        $this->chat->message("Prepare for <b>IELTS</b> with us")
+//            ->replyKeyboard(KeyboardService::mainMarkup())->send();
+//
+//        $chat_user = From::query()->where('chat_id', $this->chat->chat_id)->first();
+//        if (!isset($chat_user)) {
+//            From::query()->create([
+//                'chat_id' => $this->chat->chat_id,
+//                'user' => $this->message->from()->toArray()
+//            ]);
+//        }
+
+    }
 
     public function handleInlineQuery(InlineQuery $inlineQuery): void
     {
@@ -69,15 +81,14 @@ class MyWebhookHandler extends WebhookHandler
 //        }
 
 
-
-
-
 //        $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
 
 
         $cam = Cambridge::query()->where('key', 'Cam 2 2')->first();
         $this->bot->answerInlineQuery($inlineQuery->id(), [
-            InlineQueryResultAudio::make($cam->id, config('app.url') . $cam->audio_path, config('app.url') . $cam->audio_path)
+
+//            InlineQueryResultAudio::make($cam->id, 'https://ieltstrainingonline.com/wp-content/uploads/2021/07/Cam15-Test2-Part1.m4a?_=1', 'Qondayee'),
+            InlineQueryResultAudio::make($cam->id . 'sda', config('app.url') . '/audio', 'localniy fayl'),
         ])->send();
     }
 
