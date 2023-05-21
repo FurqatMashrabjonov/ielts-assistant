@@ -33,6 +33,7 @@ class CambridgeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('key')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('audio_file_id')->searchable()->sortable(),
             ])
             ->filters([
                 //

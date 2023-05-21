@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('cambridges', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('pdf_path')->nullable();
             $table->string('key');
-            $table->string('audio_path')->nullable();
+            $table->string('audio_file_id')->nullable();
+            $table->string('pdf_file_id')->nullable();
         });
     }
 
