@@ -9,10 +9,13 @@ class Cambridge extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
-        'pdf_path',
-        'audio_path'
+        'audio_file_id',
+        'pdf_file_id'
     ];
 
     public $timestamps = false;

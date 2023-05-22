@@ -2,6 +2,7 @@
 
 namespace App\Core\Telegraph;
 
+use App\Core\Telegraph\Inline\AnswerInlineQueryCachedAudio;
 use App\Core\Telegraph\Keyboards\KeyboardService;
 use App\Filament\Resources\CambridgeResource;
 use App\Models\Cambridge;
@@ -48,27 +49,24 @@ class MyWebhookHandler extends WebhookHandler
     public function handleInlineQuery(InlineQuery $inlineQuery): void
     {
         $query = ucfirst($inlineQuery->query()); //string
-        \Log::debug($query);
         $cams = Cambridge::query()
             ->where('key', 'LIKE', "%$query%")
             ->orWhere('name', 'LIKE', "%$query%")
             ->limit(50)
             ->get();
 
-        \Log::info('data', $cams->toArray());
-
         $data = [];
 
         foreach ($cams as $cam) {
-            $text = $cam->name . PHP_EOL . PHP_EOL . '@ieltswithbot';
-            $data[] = InlineQueryResultArticle::make($cam->id, $cam->name, $text)->keyboard(
-                Keyboard::make()->row([
-                    Button::make('Audio')->action('only_audio')->param('cambridge_id', $cam->id),
-                    Button::make('Audio + PDF')->action('audio_plus_pdf')->param('ds', '3'),
-                ])
-            );
+            $caption = $cam->name . PHP_EOL . PHP_EOL . '@ieltswithbot';
+            $data[] = AnswerInlineQueryCachedAudio::make($cam->id, $cam->audio_file_id, $cam->name)->caption($caption);
         }
         $this->bot->answerInlineQuery($inlineQuery->id(), $data)->send();
+    }
+
+    public function audio(){
+        $cam_id = $this->data->get('cambridge_id');
+        \Log::debug($cam_id);
     }
 
 }
