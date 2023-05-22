@@ -51,7 +51,7 @@ class MyWebhookHandler extends WebhookHandler
     }
 
     public function help(){
-        $this->chat->forwardMessage('778912691', '410')->send();
+        $this->chat->forwardMessage('778912691', '427')->send();
     }
 
     public function handleInlineQuery(InlineQuery $inlineQuery): void
