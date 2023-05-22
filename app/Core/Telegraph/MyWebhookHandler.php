@@ -30,20 +30,28 @@ class MyWebhookHandler extends WebhookHandler
 
     }
 
+
     //COMMAND HANDLERS
     public function start($parameters): void
     {
-        $this->chat->message("Prepare for <b>IELTS</b> with us")
-            ->replyKeyboard(KeyboardService::mainMarkup())->send();
 
-        $chat_user = From::query()->where('chat_id', $this->chat->chat_id)->first();
-        if (!isset($chat_user)) {
-            From::query()->create([
-                'chat_id' => $this->chat->chat_id,
-                'user' => $this->message->from()->toArray()
-            ]);
-        }
+        $this->reply('The bot is currently under development. It will soon come to serve you with its magical functions');
 
+//        $this->chat->message("Prepare for <b>IELTS</b> with us")
+//            ->replyKeyboard(KeyboardService::mainMarkup())->send();
+
+//        $chat_user = From::query()->where('chat_id', $this->chat->chat_id)->first();
+//        if (!isset($chat_user)) {
+//            From::query()->create([
+//                'chat_id' => $this->chat->chat_id,
+//                'user' => $this->message->from()->toArray()
+//            ]);
+//    }
+
+    }
+
+    public function help(){
+        $this->chat->forwardMessage('778912691', '410')->send();
     }
 
     public function handleInlineQuery(InlineQuery $inlineQuery): void
