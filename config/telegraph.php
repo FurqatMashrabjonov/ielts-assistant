@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Chat;
 use DefStudio\Telegraph\Telegraph;
 
 return [
@@ -70,7 +71,7 @@ return [
      */
     'models' => [
         'bot' => DefStudio\Telegraph\Models\TelegraphBot::class,
-        'chat' => DefStudio\Telegraph\Models\TelegraphChat::class,
+        'chat' => Chat::class,
     ],
 
     'storage' => [

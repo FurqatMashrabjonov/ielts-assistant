@@ -3,20 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ChatResource\Pages;
-use App\Filament\Resources\ChatResource\RelationManagers;
 use App\Models\Chat;
-use DefStudio\Telegraph\Models\TelegraphChat;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ChatResource extends Resource
 {
-    protected static ?string $model = TelegraphChat::class;
+    protected static ?string $model = Chat::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -34,6 +29,9 @@ class ChatResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('chat_id')->searchable(),
                 Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('from.user.username')->label('Username'),
+                Tables\Columns\TextColumn::make('from.user.first_name')->label('First Name'),
+                Tables\Columns\TextColumn::make('from.user.last_name')->label('Last Name'),
             ])
             ->filters([
                 //
