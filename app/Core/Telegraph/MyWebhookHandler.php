@@ -36,7 +36,7 @@ class MyWebhookHandler extends WebhookHandler
     {
 
         $this->reply('The bot is currently under development. It will soon come to serve you with its magical functions');
-
+        $this->chat->forwardMessage('778912691', '427')->send();
 //        $this->chat->message("Prepare for <b>IELTS</b> with us")
 //            ->replyKeyboard(KeyboardService::mainMarkup())->send();
 
